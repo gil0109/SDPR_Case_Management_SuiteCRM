@@ -3,7 +3,7 @@ name: SuiteCRM Build and Update
 on:
   push:
     branches:
-      - main
+      - update_docker
 
 jobs:
   build:
