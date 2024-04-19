@@ -1,0 +1,55 @@
+name: SuiteCRM Build and Update
+
+on:
+  push:
+    branches:
+      - update_docker
+  workflow_dispatch: # Add the workflow_dispatch trigger
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: suitecrm:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up PostgreSQL
+        uses: postgresql/setup-postgres@v1
+        with:
+          postgresql-version: '12'
+
+      - name: Run SuiteCRM installer
+        run: |
+          docker run --name suitecrm-temp -d -e POSTGRES_USER=your_user -e POSTGRES_PASSWORD=your_password postgres:12
+          docker exec suitecrm-temp bash -c 'cd /var/www/html/SuiteCRM-8.0.0; php -f install.php'
+
+      - name: Export SuiteCRM files from container
+        run: docker cp suitecrm-temp:/var/www/html/SuiteCRM-8.0.0 ./
+
+      - name: Build updated Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: suitecrm:latest
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
