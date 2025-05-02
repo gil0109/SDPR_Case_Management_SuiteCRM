@@ -1,0 +1,106 @@
+.role-manager {
+    .moduleTitle {
+        h2 {
+            margin: 0;
+        }
+    }
+    table.role-detail {
+        position: relative;
+        top: 2em;
+        border-radius: 10px;
+        overflow: hidden;
+
+        td {
+            padding: 8px 24px;
+        }
+    }
+    .action-button {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: 2em;
+        margin-bottom: 1em;
+        .button {
+            padding: 8px 16px;
+            color: $surface-color-border-dark;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 27px;
+            border: 1px solid $surface-color-border-dark;
+            background-color: $white;
+            text-transform: capitalize;
+            height: fit-content;
+            margin: 0;
+            &:hover {
+                background-color: $secondary-button-hover;
+            }
+        }
+        #SAVE_HEADER {
+            background: $surface-color-background-blue;
+            color: $white;
+            margin-left: 24px;
+            &:hover {
+                background-color: $surface-color-primary-hover;
+            }
+        }
+    }
+    .hidebtn {
+        display: none;
+    }
+
+    .heading-text {
+        position: relative;
+        top: 3.5em;
+        float: left;
+    }
+    .action_buttons {
+        position: absolute;
+        top: 40px;
+        bottom: auto;
+        display: flex;
+        gap: 24px;
+        .btn {
+            background-color: $white;
+            font-size: 16px;
+            font-weight: 700;
+            height: fit-content;
+            line-height: 27px;
+            padding: 8px 16px;
+            text-transform: capitalize;
+            margin: 0;
+            border-radius: 6px;
+            display: flex;
+            border: 1px solid $surface-color-border-dark;
+            color:  $surface-color-border-dark;
+            &:hover {
+                background: $secondary-button-hover;
+            }
+        }
+        input[title="Edit"] {
+            background: $surface-color-background-blue;
+            color: $white;
+            &:hover {
+                background-color: $surface-color-primary-hover;
+            }
+        }
+    }
+    .view {
+        border-radius: 10px;
+        overflow: hidden;
+
+        td {
+            padding: 8px;
+        }
+        td:last-child {
+            padding: 8px 16px 8px 8px;
+        }
+        td:first-child {
+            padding: 8px 8px 8px 16px;
+        }
+
+    }
+    select {
+        background: url($select-edit-background-url) no-repeat right;
+        background-size: 25px 11px;
+        border-color: $bright-grey;
+    }
+}
