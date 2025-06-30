@@ -35,4 +35,7 @@ $sugar_config = array (
     'en_us' => 'English (US)',
   ),
   'site_url' => 'https://' . getenv('SUITECRM_URL'),
+
+  // Added unique_key (required for session and CSRF protection)
+  'unique_key' => getenv('SUITECRM_UNIQUE_KEY') ?: 'replace_this_with_a_real_key',
 );
