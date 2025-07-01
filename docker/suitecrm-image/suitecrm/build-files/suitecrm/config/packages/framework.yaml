@@ -11,7 +11,6 @@ framework:
     cookie_lifetime: null
     cookie_secure: auto
     cookie_samesite: lax
-    storage_factory_id: '%env(SESSION_SAVE_FACTORY_ID)%'
 #    storage_factory_id: session.storage.factory.legacy_bridge
 #    handler_id: session.handler.legacy_bridge
 #    save_path: ~
@@ -24,8 +23,8 @@ framework:
   assets:
       base_path: '/'
   
-  when@test:
-    framework:
-        test: true
-        session:
-            storage_factory_id: session.storage.factory.mock_file
+when@test:
+  framework:
+      test: true
+      session:
+          storage_factory_id: session.storage.factory.mock_file
