@@ -14,6 +14,7 @@ framework:
 #    storage_factory_id: session.storage.factory.legacy_bridge
 #    handler_id: session.handler.legacy_bridge
 #    save_path: ~
+    storage_factory_id: '%env(SESSION_SAVE_FACTORY_ID)%'
     handler_id: '%env(SESSION_SAVE_HANDLER_ID)%'
     save_path: '%env(SESSION_SAVE_PATH)%'
 
