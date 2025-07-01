@@ -2,7 +2,7 @@ framework:
   secret: "%secret%"
 
 parameters:
-  secret: '%env(APP_SECRET)%'
+  secret: '%env(SUITECRM_UNIQUE_KEY)%'
   legacy.dir: '%kernel.project_dir%/public/legacy'
   packages.upgrade.dir: '%kernel.project_dir%/tmp/package/upgrade'
   legacy.path: '/legacy'
@@ -14,31 +14,31 @@ parameters:
   log.main.default: '%kernel.environment%.log'
   log.security.default: '%kernel.environment%.security.log'
   log.deprecation.default: '%kernel.environment%.deprecation.log'
-  site.url: '%env(SITE_URL)%'
+  site.url: '%env(ServerName)%'
   saml.autocreate.attributes_map: '%env(json:SAML_AUTOCREATE_ATTRIBUTES_MAP)%'
 
 services:
-  Symfony\Component\Ldap\Ldap:
-    arguments: [ '@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter' ]
-    tags:
-      - ldap
-  Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
-    arguments:
-      - '%ldap.options%'
-  Redis:
-      # you can also use \RedisArray, \RedisCluster or \Predis\Client classes
-      class: Redis
-      calls:
-          - connect:
-              - '%env(REDIS_HOST)%'
-              - '%env(int:REDIS_PORT)%'
-          # If your Redis server requires a password, uncomment the following lines:
-          # - auth:
-          #     - '%env(REDIS_PASSWORD)%'
+  # Symfony\Component\Ldap\Ldap:
+  #   arguments: [ '@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter' ]
+  #   tags:
+  #     - ldap
+  # Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
+  #   arguments:
+  #     - '%ldap.options%'
+  # Redis:
+  #     # you can also use \RedisArray, \RedisCluster or \Predis\Client classes
+  #     class: Redis
+  #     calls:
+  #         - connect:
+  #             - '%env(REDIS_HOST)%'
+  #             - '%env(int:REDIS_PORT)%'
+  #         # If your Redis server requires a password, uncomment the following lines:
+  #         # - auth:
+  #         #     - '%env(REDIS_PASSWORD)%'
 
-  Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
-      arguments:
-          - '@Redis'
+  # Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+  #     arguments:
+  #         - '@Redis'
 
 imports:
   - { resource: services/**/*.yaml }
