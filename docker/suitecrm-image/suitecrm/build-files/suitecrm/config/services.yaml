@@ -18,13 +18,13 @@ parameters:
   saml.autocreate.attributes_map: '%env(json:SAML_AUTOCREATE_ATTRIBUTES_MAP)%'
 
 services:
-  # Symfony\Component\Ldap\Ldap:
-  #   arguments: [ '@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter' ]
-  #   tags:
-  #     - ldap
-  # Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
-  #   arguments:
-  #     - '%ldap.options%'
+  Symfony\Component\Ldap\Ldap:
+    arguments: [ '@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter' ]
+    tags:
+      - ldap
+  Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
+    arguments:
+      - '%ldap.options%'
   # Redis:
   #     # you can also use \RedisArray, \RedisCluster or \Predis\Client classes
   #     class: Redis
