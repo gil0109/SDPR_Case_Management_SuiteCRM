@@ -45,14 +45,18 @@ services:
     arguments:
       - '@RedisCluster'
 
+  App\Engine\LegacyHandler\LegacyScopeState:
+    public: true
+    shared: true
+
   App\Engine\LegacyHandler\DefaultLegacyHandler:
     arguments:
       $projectDir: '%kernel.project_dir%'
       $legacyDir: '%legacy.dir%'
-      $sessionName: '%legacy.session_name%'
-      $siteUrl: '%site.url%'
-      $logger: '@logger'
-      $environment: '%kernel.environment%'
+      $legacySessionName: '%legacy.session_name%'
+      $defaultSessionName: '%default_session_name%'
+      $legacyScopeState: '@App\Engine\LegacyHandler\LegacyScopeState'
+      $requestStack: '@request_stack'
 
   App\Security\Session\LegacyBridgeSessionHandler:
     arguments:
