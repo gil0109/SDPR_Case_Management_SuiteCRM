@@ -47,26 +47,26 @@ services:
     arguments:
       - '@RedisCluster'
 
-  App\Engine\LegacyHandler\LegacyScopeState:
-    public: true
-    shared: true
+  # App\Engine\LegacyHandler\LegacyScopeState:
+  #   public: true
+  #   shared: true
 
-  App\Engine\LegacyHandler\DefaultLegacyHandler:
-    arguments:
-      $projectDir: '%kernel.project_dir%'
-      $legacyDir: '%legacy.dir%'
-      $legacySessionName: '%legacy.session_name%'
-      $defaultSessionName: '%default_session_name%'
-      $legacyScopeState: '@App\Engine\LegacyHandler\LegacyScopeState'
-      $requestStack: '@request_stack'
+  # App\Engine\LegacyHandler\DefaultLegacyHandler:
+  #   arguments:
+  #     $projectDir: '%kernel.project_dir%'
+  #     $legacyDir: '%legacy.dir%'
+  #     $legacySessionName: '%legacy.session_name%'
+  #     $defaultSessionName: '%default_session_name%'
+  #     $legacyScopeState: '@App\Engine\LegacyHandler\LegacyScopeState'
+  #     $requestStack: '@request_stack'
 
-  App\Security\Session\LegacyBridgeSessionHandler:
-    arguments:
-      - '@Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler'
-      - '@App\Engine\LegacyHandler\DefaultLegacyHandler'
+  # App\Security\Session\LegacyBridgeSessionHandler:
+  #   arguments:
+  #     - '@Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler'
+  #     - '@App\Engine\LegacyHandler\DefaultLegacyHandler'
 
-  session.handler.legacy_bridge:
-    alias: App\Security\Session\LegacyBridgeSessionHandler'
+  # session.handler.legacy_bridge:
+  #   alias: App\Security\Session\LegacyBridgeSessionHandler'
 
 imports:
   - { resource: services/**/*.yaml }
