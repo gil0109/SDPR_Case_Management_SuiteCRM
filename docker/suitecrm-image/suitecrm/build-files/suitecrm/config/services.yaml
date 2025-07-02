@@ -48,6 +48,11 @@ services:
   App\Engine\LegacyHandler\DefaultLegacyHandler:
     arguments:
       $projectDir: '%kernel.project_dir%'
+      $legacyDir: '%legacy.dir%'
+      $sessionName: '%legacy.session_name%'
+      $siteUrl: '%site.url%'
+      $logger: '@logger'
+      $environment: '%kernel.environment%'
 
   App\Security\Session\LegacyBridgeSessionHandler:
     arguments:
