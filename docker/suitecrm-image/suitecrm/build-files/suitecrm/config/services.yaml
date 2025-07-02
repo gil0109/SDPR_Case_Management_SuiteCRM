@@ -1,5 +1,7 @@
 framework:
   secret: "%secret%"
+  session:
+    handler_id: session.handler.legacy_bridge
 
 parameters:
   secret: '%env(APP_SECRET)%'
@@ -64,7 +66,7 @@ services:
       - '@App\Engine\LegacyHandler\DefaultLegacyHandler'
 
   session.handler.legacy_bridge:
-    alias: App\Security\Session\LegacyBridgeSessionHandler
+    alias: App\Security\Session\LegacyBridgeSessionHandler'
 
 imports:
   - { resource: services/**/*.yaml }
