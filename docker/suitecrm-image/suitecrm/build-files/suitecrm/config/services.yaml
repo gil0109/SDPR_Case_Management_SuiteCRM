@@ -1,7 +1,5 @@
 framework:
   secret: "%secret%"
-  session:
-    handler_id: '%env(SESSION_SAVE_HANDLER_ID)%'
 
 parameters:
   secret: '%env(APP_SECRET)%'
@@ -24,28 +22,27 @@ services:
     arguments: [ '@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter' ]
     tags:
       - ldap
-
   Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
     arguments:
       - '%ldap.options%'
 
-  RedisCluster:
-    class: RedisCluster
-    arguments:
-      - null
-      - ['%env(resolve:REDIS_NODES)%']
-      - 2
-      - 2
-      - true
-    calls:
-      - method: setOption
-        arguments:
-          - !php/const Redis::OPT_SERIALIZER
-          - !php/const Redis::SERIALIZER_PHP
+  # RedisCluster:
+  #   class: RedisCluster
+  #   arguments:
+  #     - null
+  #     - ['%env(resolve:REDIS_NODES)%']
+  #     - 2
+  #     - 2
+  #     - true
+  #   calls:
+  #     - method: setOption
+  #       arguments:
+  #         - !php/const Redis::OPT_SERIALIZER
+  #         - !php/const Redis::SERIALIZER_PHP
 
-  Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
-    arguments:
-      - '@RedisCluster'
+  # Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+  #   arguments:
+  #     - '@RedisCluster'
 
   # App\Engine\LegacyHandler\LegacyScopeState:
   #   public: true
