@@ -1,11 +1,11 @@
 <?php
 $sugar_config = array (
+  'unique_key' => getenv('APP_SECRET'),
   'cron' => 
   array (
     'max_cron_jobs' => 10,
     'max_cron_runtime' => 30,
     'min_cron_interval' => 30,
-    'unique_key' => getenv('APP_SECRET'),
     'allowed_cron_users' => 
     array (
       0 => 'root_REMOVE_THIS_NOTICE_IF_YOU_REALLY_WANT_TO_ALLOW_ROOT',
