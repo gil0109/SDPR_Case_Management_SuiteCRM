@@ -119,6 +119,11 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.global.secrets.suitecrmSecretName }}
                   key: redis-path
+            - name: OAUTH_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.secrets.suitecrmSecretName }}
+                  key: oauth-key
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
